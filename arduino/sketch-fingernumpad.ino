@@ -18,7 +18,7 @@ const byte MIDDLE_RING_LITTLE_FINGERS = 14;
 const byte INDEX_MIDDLE_RING_LITTLE_FINGERS = 15;
 const byte INDEX_RING_FINGERS = 5;
 
-// const short REPEAT_TIME = 250;
+const short DEBOUNCE_TIME = 50;
 
 void setup() {
   // Initialize the input pins
@@ -36,7 +36,8 @@ void setup() {
 
 void loop() {
   static char pressedKey = 0;
-  // static unsigned long pressedTime = 0;
+  static char lastPressedKey = 0;
+  static unsigned long pressedTime = millis();
 
   // Read the state of the input pins
   // Inverse the PULLUP value (HIGH for open circuit, LOW for closed circuit)
@@ -52,23 +53,21 @@ void loop() {
 
   // Map the finger combination to an ASCII char
   char key = mapFingersToASCII(fingers);
+  if (key != lastPressedKey) {
+    pressedTime = millis();
+  }
 
-  // Any key pressed?
-  if (key > 0) {
-    // TODO multi-finger combinations are going to detach 1 finger at a time
-    // and will be immediately seen as another key press. (e.g. backspace
-    // --- a 2 finger combination --- remove the last char, but as soon as
-    // 1 finger is off, leaving one connected, it's another number input)
-    // it should be debounced for a low number of cycle (empirical value
-    // at the limit of lag)
+  if (millis() - pressedTime > DEBOUNCE_TIME) {
     if (key != pressedKey) {
       pressedKey = key;
-      // pressedTime = millis();
-      Serial.write(key);
+
+      if (pressedKey > 0) {
+        Serial.write(pressedKey);
+      }
     }
-  } else {
-    pressedKey = 0;
   }
+
+  lastPressedKey = key;
 
   // Small delay to debounce and prevent reading too fast
   delay(10);
