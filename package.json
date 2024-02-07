@@ -1,0 +1,17 @@
+{
+  "name": "finger-numpad-over-serial",
+  "version": "1.0.0",
+  "description": "Finger contraption simulating a 4-key numpad on an Arduino and communicating with computer over serial port",
+  "author": "jerome lecomte <jerle76@gmail.com>",
+  "scripts": {
+    "cli": "node cli/serial.js",
+    "web": "vite www --open"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "serialport": "^12.0.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.12"
+  }
+}
