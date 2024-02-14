@@ -1,3 +1,16 @@
+/*
+ * Emulate a numpad with a data glove
+ *
+ * Read the state of 4 digital pins in INPUT_PULLUP mode connected to the index/pointer, middle, ring and little fingers.
+ * The thumb is connected to the ground and touching a finger with the thumb will close the circuit and change the state of the corresponding pin to LOW.
+ * The combination of the finger states is mapped to an ASCII character and sent to the serial port.
+ *
+ * See BOM.txt for the Bill of Material, Circuit layout and Schematic for wiring instructions (in both diagrams, the glove is replaced by 4 push switches for simplicity)
+ *
+ * Created on 2024-02-10 by Jerome Lecomte
+ * License: MIT
+ */
+
 // Define the digital pins used for input
 const byte INDEX_PIN = 8;
 const byte MIDDLE_PIN = 9;

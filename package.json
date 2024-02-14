@@ -1,5 +1,5 @@
 {
-  "name": "finger-numpad-over-serial",
+  "name": "data-glove-as-numpad-over-serial",
   "version": "1.0.0",
   "description": "Finger contraption simulating a 4-key numpad on an Arduino and communicating with computer over serial port",
   "author": "jerome lecomte <jerle76@gmail.com>",
